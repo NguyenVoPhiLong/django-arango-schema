@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Website</title>
+    {% load static %}
+    
+    <link rel="shortcut icon" type="image/png" href="{%  static 'favicon.ico' %}"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="{% static 'home/style.css' %}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="{% static 'home/js/main.js' %}"></script>
+    <style>
+        table, th, td {
+          border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+
+        <!-- Header -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="">Long's Project</a>
+        </div>
+
+        <!-- Items -->
+        <div class="collapse navbar-collapse" id="topNavBar">
+            <ul class="nav navbar-nav">
+                <li class=""><a href="">Đăng kí</a></li>
+                <li class=""><a href="">Đăng nhập</a></li>
+            </ul>
+        </div>
+
+    </div>
+</nav>
+
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3><strong>Collecttion ==></strong> &nbsp;&nbsp;<a href="{% url 'home:addCollection' %}"><button> Add Collecttion </button></a></h3>
+                    
+                    
+                    
+                    <table style="width: 100%;">
+                        <tr>
+                            <th>key</th>
+                            <th>username</th>
+                            <th>password</th>
+                            <th>email</th>
+                            <th>isactive</th>
+                            <th>issuperuser</th>
+                            <th>dob</th>
+                            <th>Actions</th>
+                            
+                        </tr>
+                        {% for u in users %}
+                        <tr>
+                            <td>{{u.key}}</td>
+                            <td>{{u.username}}</td>
+                            <td>{{u.password}}</td>
+                            <td>{{u.email}}</td>
+                            <td>{{u.is_active}}</td>
+                            <td>{{u.is_superuser}}</td>
+                            <td>{{u.dob}}</td>
+                            <td>
+                                <a href="{% url 'home:editCollection' u.key %}">Edit</a> &nbsp;&nbsp;
+                                <a href="{% url 'home:delCollection' u.key %}">Delete</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div> <br>
+            Number of users: {{num_users}}
+        </div>
+        
+    </div>
+
+</div>
+
+
+
+</body>
+</html>
